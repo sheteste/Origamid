@@ -25,7 +25,7 @@ img1.addEventListener('click', () => {
 let img2 = document.querySelector('img');
 
 function callback(event){
-    console.log(event);
+    // console.log(event);
 }
 img2.addEventListener('click', callback);
 
@@ -39,6 +39,26 @@ function executarCallback(event) {
     let target = event.target; //onde o click ocorreu
     let type = event.type; //tipo de evento
     let path = event.path;
-    console.log(currentTarget, target, type, path);
+    // console.log(currentTarget, target, type, path);
 }
 animaisLista.addEventListener('click', executarCallback);
+
+//event.preventDefault() - Previne o comportamento padrão do evento no browser. No caso de um link externo, por exemplo, irá previnir que o link seja ativado.
+let linkExterno = document.querySelector('a[href^="http"]');
+
+function clickNoLink(event){
+    event.preventDefault();
+    // console.log(event.currentTarget.href);
+}
+linkExterno.addEventListener('click', clickNoLink);
+
+//this - a palavra chave this é uma palavra especial de JavaScript que, pode fazer referência a diferentes objetos dependendo do contexto. No caso de eventos, ele fará referência ao elemento em que addEventListener foi adicionado.
+let img3 = document.querySelector('img');
+
+function callback(event) {
+    console.log(this); //retorna a imagem
+    console.log(this.getAttribute('src'));
+}
+img3.addEventListener('click', callback);
+
+//geralmente igual ao event.currentTarget
